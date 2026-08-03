@@ -45,7 +45,8 @@ cards, README images, video thumbnails, GIFs, badge images.
 carriers of a retired number, and they sit at the top of the README where they
 are the first thing a reader sees.
 
-- SVG is text: `grep -rn "OLD" -- '*.svg'` works and is worth running first.
+- SVG is text: `grep -rn "OLD" --include='*.svg' .` works and is worth running
+  first. (`-- '*.svg'` does not: it passes a literal filename, not a filter.)
 - Raster images are not. List them and open them:
 
       find . -name '*.png' -o -name '*.jpg' -o -name '*.webp' | grep -v node_modules
@@ -144,7 +145,10 @@ is the category to *report* rather than fix, and reporting it is the deliverable
 
 Prose describing behaviour that has changed.
 
-    grep -rn "OLD" --include='*.*' . | grep -E '^\s*(//|#|\*|<!--)'
+    grep -rn "OLD" --include='*.*' . | grep -E ':[0-9]+:\s*(//|#|\*|<!--)'
+
+(The second grep anchors after `path:line:`, because `grep -rn` prefixes every
+line with them; anchoring on `^` there harvests nothing, silently.)
 
 A comment that describes a fixed bug has become the bug. A comment asserting a
 measurement ("this is 44px wider", "there are ten of these") is a claim like any
