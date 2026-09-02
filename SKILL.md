@@ -1,11 +1,11 @@
 ---
 name: claim-sweep
-description: Find every artifact that still asserts a fact after that fact has changed. Use when a version, number, grade, price, date, default, endpoint, or product name changes and the README, docs, site copy, captured screenshots, published package, tests, and third-party listings may still carry the old value. Also use when two places disagree about the same number, when a published claim turns out to be stale, when someone asks "is this still true", or before a launch, release, rename, or migration announcement.
+description: Find every artifact that still asserts a fact after that fact has changed. Use when a version, number, grade, price, date, default, endpoint, or product name changes and the README, docs, site copy, captured screenshots, published package, tests, and third-party listings may still carry the old value. Also use when two places disagree about the same number, when a published claim turns out to be stale, when someone asks "is this still true", when a decision looks settled but no page names the actual value, or before a launch, release, rename, or migration announcement.
 license: Apache-2.0
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   homepage: "https://efaimo.ai"
-  verified_against: "2026-08-02"
+  verified_against: "2026-09-03"
 ---
 
 # claim-sweep
@@ -99,6 +99,39 @@ decide, for each one: does it now check the new claim, or does it check
 nothing? An instrument that harvests zero matches should be red, not green.
 That rule is worth applying to every checker you own, not just the ones
 involved in this sweep.
+
+## The one a sweep cannot find: the value that was never named
+
+Everything above assumes a fact changed and left copies of its old value behind.
+There is a sibling failure with the same symptom and no old value to search for,
+so a sweep runs clean while the problem sits in the open.
+
+It happens when the authoritative page names a **category** instead of a
+**value**. "We will pin the dependency." "We will use a queue." "The retention
+window is configurable." Each reads like a settled decision and none of them
+decides anything. Downstream, two documents each pick a value, each written by
+someone who believed the question was closed upstream, and neither cites the
+other. Both are internally consistent. Nothing contradicts the canonical page,
+because the canonical page said nothing.
+
+You cannot grep for this. There is no stale string; there is an absent one. It
+surfaces only when someone reads two downstream documents in the same sitting,
+which can take months, or when one of them is executed.
+
+**The tell** is a decision sentence whose object is a kind of thing rather than
+a thing. Read your canonical page and, for each decision, ask whether you could
+act on it without asking a follow-up question. "Pin the dependency" fails,
+because the next question is "to what version". "Pin lodash to 4.17.21" passes.
+
+**The fix** is a rule about decision records rather than a search: a decision
+records the value, not the category. If the value is genuinely undecided, that
+is fine and it belongs in the open-questions list rather than in the decided
+one, where its presence is what makes two readers disagree in confidence.
+
+**Before you sweep**, confirm the value was ever named. Sweeping for a changed
+value when nothing was ever decided finds zero carriers and reports success,
+which is the same vacuous green this skill warns about one section up, arriving
+from the other direction.
 
 ## What this is not
 
