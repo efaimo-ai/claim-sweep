@@ -1,5 +1,6 @@
 # claim-sweep
 
+[![npm](https://img.shields.io/npm/v/claim-sweep?color=0b7285&label=npm)](https://www.npmjs.com/package/claim-sweep)
 [![license](https://img.shields.io/badge/license-Apache--2.0-0b7285)](LICENSE)
 [![grade](https://img.shields.io/badge/efaimo%20check--skill-A%20(100)-0b7285)](https://efaimo.ai/skills)
 [![house-style](https://github.com/efaimo-ai/claim-sweep/actions/workflows/house-style.yml/badge.svg)](https://github.com/efaimo-ai/claim-sweep/actions/workflows/house-style.yml)
@@ -12,6 +13,27 @@ screenshot at the top of the README with the old number rendered into it, the
 package you published last week, the test that asserts the old value, the check
 you wrote to watch the claim and which now watches nothing, and the listing on
 somebody else's site that scraped you in July.
+
+<!-- generated:install -->
+
+## Install
+
+```sh
+npx claim-sweep                 # into ./.claude/skills/claim-sweep/
+npx claim-sweep --global        # into ~/.claude/skills/claim-sweep/
+npx claim-sweep --check         # installed, and current?
+```
+
+The package is the skill: `SKILL.md` and its `references/`, nothing else. The
+installer copies them, reads every byte back, and fails if what landed is not
+what it wrote. It refuses to overwrite a directory whose contents differ unless
+you pass `--force`, and installing the same version twice is a success rather
+than a conflict.
+
+Or take it by hand. It is markdown; `npx claim-sweep --print` writes `SKILL.md` to
+stdout, and the repository is the whole thing.
+
+<!-- /generated:install -->
 
 ## The shape of a sweep
 
@@ -100,6 +122,34 @@ It tells you where a claim is **repeated**. It does not tell you whether the new
 value is **correct** - deciding that is your job. What it makes sure of is that
 the old one stops being published.
 
+
+<!-- generated:pipeline -->
+
+## What installing it does to a session
+
+A skill is not free just because it is markdown. Its frontmatter is loaded at
+the start of every session for every skill you have installed, whether or not it
+ever fires.
+
+```mermaid
+flowchart LR
+    N["npx claim-sweep"] --> D[/".claude/skills/claim-sweep/"/]
+    D --> M["frontmatter<br/><b>every session, always</b>"]
+    D --> B["SKILL.md body<br/><i>only when it triggers</i>"]
+    D --> R["references/<br/><i>only if the agent reads them</i>"]
+    M --> S(["your context window"])
+    B -.->|"on trigger"| S
+    R -.->|"on demand"| S
+    classDef always fill:#c9282822,stroke:#c92828,stroke-width:1px;
+    classDef lazy fill:#0b728522,stroke:#0b7285,stroke-width:1px;
+    class M always;
+    class B,R lazy;
+```
+
+In this skill's case, measured by [efaimo](https://github.com/efaimo-ai/efaimo) `weigh` (v0.5.0, 2026-09-04):
+**123 tokens always resident**, 1,524 when it triggers, 2,647 across 2 reference files if the agent reads to the end.
+
+<!-- /generated:pipeline -->
 
 ## The set
 
