@@ -1,6 +1,6 @@
 ---
 name: claim-sweep
-description: Find every artifact that still asserts a fact after that fact has changed. Use when a version, number, grade, price, date, default, endpoint, or product name changes and the README, docs, site copy, captured screenshots, published package, tests, and third-party listings may still carry the old value. Also use when two places disagree about the same number, when a published claim turns out to be stale, when someone asks "is this still true", when a decision looks settled but no page names the actual value, or before a launch, release, rename, or migration announcement.
+description: Find every artifact that still asserts a fact after that fact has changed - a version, number, grade, price, date, default, endpoint, or product name. Use when two places disagree about the same number, when a published claim turns out to be stale, when someone asks "is this still true", when a decision looks settled but no page names the actual value, or before a launch, release, rename, or migration announcement.
 license: Apache-2.0
 metadata:
   version: "0.2.0"
@@ -142,3 +142,15 @@ search has somewhere to go.
 It also will not tell you whether a claim is *true*. It tells you where a claim
 is *repeated*. Deciding the new value is your job; this makes sure the old one
 stops being published.
+
+<!-- generated:siblings -->
+
+## Siblings
+
+Every skill in this set is about a report that was true about the wrong thing. The set: https://efaimo.ai/skills
+
+- `red-before-green` - step 5, and the reason a guard you have never watched fail is not a guard.
+- `unreleased-guard` - when the fact that changed is a version, and the gap between the tree and the registry is what made the copy wrong.
+- `denominator` - for the instruments in step 4: a checker that went vacuously green is one whose denominator fell to zero.
+
+<!-- /generated:siblings -->

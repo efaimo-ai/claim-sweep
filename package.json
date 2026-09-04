@@ -1,7 +1,7 @@
 {
   "name": "claim-sweep",
   "version": "0.2.0",
-  "description": "Find every artifact that still asserts a fact after that fact has changed.",
+  "description": "Find every artifact that still asserts a fact after that fact has changed - a version, number, grade, price, date, default, endpoint, or product name.",
   "type": "module",
   "license": "Apache-2.0",
   "author": "efaimo ai (https://efaimo.ai)",
