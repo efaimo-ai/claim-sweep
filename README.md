@@ -1,6 +1,5 @@
 # claim-sweep
 
-[![npm](https://img.shields.io/npm/v/claim-sweep?color=0b7285&label=npm)](https://www.npmjs.com/package/claim-sweep)
 [![license](https://img.shields.io/badge/license-Apache--2.0-0b7285)](LICENSE)
 [![grade](https://img.shields.io/badge/efaimo%20check--skill-A%20(100)-0b7285)](https://efaimo.ai/skills)
 [![house-style](https://github.com/efaimo-ai/claim-sweep/actions/workflows/house-style.yml/badge.svg)](https://github.com/efaimo-ai/claim-sweep/actions/workflows/house-style.yml)
@@ -19,10 +18,21 @@ somebody else's site that scraped you in July.
 ## Install
 
 ```sh
-npx claim-sweep                 # into ./.claude/skills/claim-sweep/
-npx claim-sweep --global        # into ~/.claude/skills/claim-sweep/
-npx claim-sweep --check         # installed, and current?
+# into ./.claude/skills/claim-sweep/
+npx -y github:efaimo-ai/claim-sweep
+
+# into ~/.claude/skills/claim-sweep/, for every project
+npx -y github:efaimo-ai/claim-sweep --global
+
+# installed already, and still current?
+npx -y github:efaimo-ai/claim-sweep --check
 ```
+
+That is the repository, not the registry, and it is deliberate: `claim-sweep` is
+not on npm yet, and a README that prints `npx claim-sweep` today would be
+advertising a command that 404s. The line above works right now. The day the
+package publishes it becomes `npx claim-sweep`, and this README is regenerated from
+a committed registry probe rather than from anybody's memory.
 
 The package is the skill: `SKILL.md` and its `references/`, nothing else. The
 installer copies them, reads every byte back, and fails if what landed is not
@@ -30,7 +40,7 @@ what it wrote. It refuses to overwrite a directory whose contents differ unless
 you pass `--force`, and installing the same version twice is a success rather
 than a conflict.
 
-Or take it by hand. It is markdown; `npx claim-sweep --print` writes `SKILL.md` to
+Or take it by hand. It is markdown; `npx -y github:efaimo-ai/claim-sweep --print` writes `SKILL.md` to
 stdout, and the repository is the whole thing.
 
 <!-- /generated:install -->
@@ -133,7 +143,7 @@ ever fires.
 
 ```mermaid
 flowchart LR
-    N["npx claim-sweep"] --> D[/".claude/skills/claim-sweep/"/]
+    N["npx -y github:efaimo-ai/claim-sweep"] --> D[/".claude/skills/claim-sweep/"/]
     D --> M["frontmatter<br/><b>every session, always</b>"]
     D --> B["SKILL.md body<br/><i>only when it triggers</i>"]
     D --> R["references/<br/><i>only if the agent reads them</i>"]
