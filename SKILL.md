@@ -4,7 +4,7 @@ description: Find every artifact that still asserts a fact after that fact has c
 license: Apache-2.0
 metadata:
   version: "0.2.0"
-  homepage: "https://efaimo.ai"
+  homepage: "https://efaimo.com"
   verified_against: "2026-09-03"
 ---
 
@@ -147,7 +147,7 @@ stops being published.
 
 ## Siblings
 
-Every skill in this set is about a report that was true about the wrong thing. The set: https://efaimo.ai/skills
+Every skill in this set is about a report that was true about the wrong thing. The set: https://efaimo.com/skills
 
 - `red-before-green` - step 5, and the reason a guard you have never watched fail is not a guard.
 - `unreleased-guard` - when the fact that changed is a version, and the gap between the tree and the registry is what made the copy wrong.
