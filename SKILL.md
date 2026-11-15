@@ -1,6 +1,6 @@
 ---
 name: claim-sweep
-description: Find every artifact that still asserts a fact after that fact has changed - a version, number, grade, price, date, default, endpoint, or product name. Use when two places disagree about the same number, when a published claim turns out to be stale, when someone asks "is this still true", when a decision looks settled but no page names the actual value, or before a launch, release, rename, or migration announcement.
+description: Use after a fact about a project has changed, to find every place that still states the old value - a version, price, limit, count, supported platform, default, endpoint, command or product name, left behind in docs and site copy, help text, tests and fixtures, screenshots and diagrams, the published package, CI checks that watched the old value, and listings you do not control. Also use when two project documents disagree about the same value, or before announcing a rename, migration or domain move. Not for dependency bumps or general fact-checking.
 license: Apache-2.0
 metadata:
   version: "0.2.0"
@@ -41,9 +41,9 @@ So: enumerate carriers first, then search each one on its own terms.
 
 ## Procedure
 
-1. **State the claim in one sentence, old value and new.** "The reference
-   server scored C(79)" becomes "it scores A(95) plus an ungraded 4-item
-   diff". Vague claims cannot be swept.
+1. **State the claim in one sentence, old value and new.** "The free plan
+   allows 1,000 requests a day" becomes "it allows 2,000". Vague claims
+   cannot be swept.
 
 2. **Enumerate the carriers before searching.** Walk the list in
    `references/carriers.md`. Write down every carrier that exists for *this*
@@ -63,13 +63,30 @@ So: enumerate carriers first, then search each one on its own terms.
    purpose and confirm something goes red. A guard you have never seen fail is
    not a guard.
 
-6. **Install the guard so the next drift is loud**, per
-   `references/guards.md`. If a value is derivable, derive it. If it must be
-   duplicated, make one copy assert the other.
+6. **Propose the guard that would make the next drift loud**, per
+   `references/guards.md`, and add it when the user wants it. If a value is
+   derivable, derive it. If it must be duplicated, make one copy assert the
+   other.
 
 7. **Report what you did not fix.** Third-party listings, caches, and other
    people's copies are usually out of your control. Name them and say who has
    to act.
+
+## Report
+
+End with one line per carrier category, so a skipped category is visible:
+
+    source of truth      checked    config/plans.json:4
+    derived renderings   fixed      README.md:31, docs/limits.md:12 ("1k/day")
+    captured output      manual     public/og-card.png shows 1,000; re-render
+    published artifacts  checked    npm 3.2.0 README still says 1,000
+    tests and fixtures   fixed      test/plans.test.js:9
+    instruments          re-aimed   scripts/check-docs.mjs matched the old sentence
+    not controlled       reported   partner pricing page (owner: partner)
+    comments             checked    none
+
+If you cannot search the files yourself (no shell, no repository), give the
+user this list with the search to run for each line.
 
 ## The carriers, in one line each
 
@@ -100,48 +117,17 @@ nothing? An instrument that harvests zero matches should be red, not green.
 That rule is worth applying to every checker you own, not just the ones
 involved in this sweep.
 
-## The one a sweep cannot find: the value that was never named
+## When nothing was ever named
 
-Everything above assumes a fact changed and left copies of its old value behind.
-There is a sibling failure with the same symptom and no old value to search for,
-so a sweep runs clean while the problem sits in the open.
+If the canonical page names a kind of thing ("we will pin the dependency")
+instead of a value, there is no old string, and a sweep comes back clean.
+Check that first: `references/never-named.md`.
 
-It happens when the authoritative page names a **category** instead of a
-**value**. "We will pin the dependency." "We will use a queue." "The retention
-window is configurable." Each reads like a settled decision and none of them
-decides anything. Downstream, two documents each pick a value, each written by
-someone who believed the question was closed upstream, and neither cites the
-other. Both are internally consistent. Nothing contradicts the canonical page,
-because the canonical page said nothing.
+## Scope
 
-You cannot grep for this. There is no stale string; there is an absent one. It
-surfaces only when someone reads two downstream documents in the same sitting,
-which can take months, or when one of them is executed.
-
-**The tell** is a decision sentence whose object is a kind of thing rather than
-a thing. Read your canonical page and, for each decision, ask whether you could
-act on it without asking a follow-up question. "Pin the dependency" fails,
-because the next question is "to what version". "Pin lodash to 4.17.21" passes.
-
-**The fix** is a rule about decision records rather than a search: a decision
-records the value, not the category. If the value is genuinely undecided, that
-is fine and it belongs in the open-questions list rather than in the decided
-one, where its presence is what makes two readers disagree in confidence.
-
-**Before you sweep**, confirm the value was ever named. Sweeping for a changed
-value when nothing was ever decided finds zero carriers and reports success,
-which is the same vacuous green this skill warns about one section up, arriving
-from the other direction.
-
-## What this is not
-
-This is not a linter and there is nothing to install. It is a procedure, and
-its whole value is in step 2: enumerate the carriers before you search, so the
-search has somewhere to go.
-
-It also will not tell you whether a claim is *true*. It tells you where a claim
-is *repeated*. Deciding the new value is your job; this makes sure the old one
-stops being published.
+A sweep finds where a claim is repeated. Whether the new value is right is a
+separate decision: when two sources disagree, settle which one is canonical
+first, or ask.
 
 <!-- generated:siblings -->
 

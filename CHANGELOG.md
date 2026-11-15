@@ -30,10 +30,24 @@ All notable changes to claim-sweep are documented here. Format follows
   run that packs the package the way npm would, installs it from that tarball,
   and installs the skill from there.
 
+### Changed
+
+- The description fires after a project fact changed, when two project
+  documents disagree, or before a rename, migration or domain move. It no
+  longer fires on "is this still true" about the world, on a dependency bump,
+  or on every release, which is `unreleased-guard`'s moment.
+- Step 1's example is a plain price limit instead of a grade only this set's
+  own tooling prints.
+- Step 6 proposes a guard and adds it when the user wants one, instead of
+  installing CI checks nobody asked for.
+- New "Report" section: one line per carrier category, and the same list handed
+  to the user when there is no shell or repository to search.
+- "The value that was never named" moved to `references/never-named.md`, with a
+  short pointer left in `SKILL.md`.
+
 ### Notes
 
-- The skill's own content did not change for this release. It grades A(100) on
-  `efaimo check --skill` before and after, and the package version and the
-  version in `SKILL.md` frontmatter are one number, pinned by a test.
+- The package version and the version in `SKILL.md` frontmatter are one number,
+  pinned by a test.
 
 [Unreleased]: https://github.com/efaimo-ai/claim-sweep/commits/main

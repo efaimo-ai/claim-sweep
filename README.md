@@ -114,15 +114,21 @@ to build and no dependencies.
 | `SKILL.md` | the procedure, and the carrier list in one line each |
 | `references/carriers.md` | all eight carrier categories with the search that finds each |
 | `references/guards.md` | how to make the next drift loud instead of silent |
+| `references/never-named.md` | the failure a sweep cannot find: a decision that never named its value |
 
 `SKILL.md` is small on purpose. It is what an agent loads at trigger time; the
 references load only when the sweep actually needs them.
 
 ## When it fires
 
-A version, number, grade, price, date, default, endpoint, or name changes. Two
-places disagree about the same figure. Someone asks whether a published claim is
-still true. You are about to launch, release, rename, or announce a migration.
+A version, price, limit, count, supported platform, default, endpoint, command
+or product name changes in a project. Two of its documents disagree about the
+same value. You are about to announce a rename, a migration or a domain move.
+It stays quiet for a plain dependency bump and for general fact-checking.
+
+It ends with one line per carrier category (checked, fixed, manual, reported),
+so a category nobody looked at shows. Guards against the next drift are
+proposed and added only when you want them.
 
 ## The part worth reading even if you never install it
 
