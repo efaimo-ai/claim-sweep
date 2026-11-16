@@ -1,5 +1,6 @@
 # claim-sweep
 
+[![npm](https://img.shields.io/npm/v/claim-sweep?color=0b7285&label=npm)](https://www.npmjs.com/package/claim-sweep)
 [![license](https://img.shields.io/badge/license-Apache--2.0-0b7285)](LICENSE)
 [![grade](https://img.shields.io/badge/efaimo%20check--skill-A%20(100)-0b7285)](https://efaimo.com/skills)
 [![house-style](https://github.com/efaimo-ai/claim-sweep/actions/workflows/house-style.yml/badge.svg)](https://github.com/efaimo-ai/claim-sweep/actions/workflows/house-style.yml)
@@ -19,31 +20,14 @@ somebody else's site that scraped you in July.
 
 ```sh
 # into ./.claude/skills/claim-sweep/
-npx -y --allow-git=all github:efaimo-ai/claim-sweep
+npx claim-sweep
 
 # into ~/.claude/skills/claim-sweep/, for every project
-npx -y --allow-git=all github:efaimo-ai/claim-sweep --global
+npx claim-sweep --global
 
 # installed already, and still current?
-npx -y --allow-git=all github:efaimo-ai/claim-sweep --check
+npx claim-sweep --check
 ```
-
-That is the repository, not the registry, and it is deliberate: `claim-sweep` is
-not on npm yet, and printing `npx claim-sweep` today would advertise a command that
-404s.
-
-`--allow-git=all` is there because npm 12 refuses git specs by default
-(`EALLOWGIT`), and it is the only value that helps: a narrower
-`--allow-git=<spec>` is still refused. **You should not enjoy typing it.**
-Switching off a protection npm added on purpose is a poor way to install
-anything, and the honest alternative is that this skill is markdown: copy
-`SKILL.md` and its `references/` into `.claude/skills/claim-sweep/` and you are
-done, with nothing to trust.
-
-Both of those go away when the package publishes, because `npx claim-sweep` needs
-no flag on either npm major. This README is regenerated from a committed
-registry probe, so that sentence changes itself rather than waiting for someone
-to remember it.
 
 The package is the skill: `SKILL.md` and its `references/`, nothing else. The
 installer copies them, reads every byte back, and fails if what landed is not
@@ -51,7 +35,7 @@ what it wrote. It refuses to overwrite a directory whose contents differ unless
 you pass `--force`, and installing the same version twice is a success rather
 than a conflict.
 
-Or take it by hand. It is markdown; `npx -y --allow-git=all github:efaimo-ai/claim-sweep --print` writes `SKILL.md` to
+Or take it by hand. It is markdown; `npx claim-sweep --print` writes `SKILL.md` to
 stdout, and the repository is the whole thing.
 
 <!-- /generated:install -->
@@ -170,8 +154,8 @@ the start of every session for every skill you have installed, whether or not it
 ever fires.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/efaimo-ai/claim-sweep/main/assets/diagram-893fe56fd6-dark.png">
-  <img alt="Installing puts SKILL.md and references/ in .claude/skills/claim-sweep/. The frontmatter enters your context window in every session, the body only when the skill triggers, and the references only if the agent reads them." src="https://raw.githubusercontent.com/efaimo-ai/claim-sweep/main/assets/diagram-893fe56fd6-light.png" width="756">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/efaimo-ai/claim-sweep/main/assets/diagram-0b9fbdec41-dark.png">
+  <img alt="Installing puts SKILL.md and references/ in .claude/skills/claim-sweep/. The frontmatter enters your context window in every session, the body only when the skill triggers, and the references only if the agent reads them." src="https://raw.githubusercontent.com/efaimo-ai/claim-sweep/main/assets/diagram-0b9fbdec41-light.png" width="756">
 </picture>
 
 <details>
@@ -180,7 +164,7 @@ ever fires.
 ```text
 flowchart TD
     accDescr: Installing puts SKILL.md and references/ in .claude/skills/claim-sweep/. The frontmatter enters your context window in every session, the body only when the skill triggers, and the references only if the agent reads them.
-    N["npx -y --allow-git=all github:efaimo-ai/claim-sweep"] --> D[/".claude/skills/claim-sweep/"/]
+    N["npx claim-sweep"] --> D[/".claude/skills/claim-sweep/"/]
     D --> M["frontmatter<br/><b>every session, always</b>"]
     D --> B["SKILL.md body<br/><i>only when it triggers</i>"]
     D --> R["references/<br/><i>only if the agent reads them</i>"]
