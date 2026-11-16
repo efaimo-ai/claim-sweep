@@ -58,8 +58,17 @@ stdout, and the repository is the whole thing.
 
 ## The shape of a sweep
 
-```mermaid
-flowchart TD
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/efaimo-ai/claim-sweep/main/assets/diagram-f83d631c40-dark.png">
+  <img alt="One changed fact leads to the code change, which is the easy part, and to every artifact that still asserts the old value: the README, docs and site copy, the published package, captured screenshots and recorded output, tests that pin the old value, the checkers that went vacuously green, and third-party listings." src="https://raw.githubusercontent.com/efaimo-ai/claim-sweep/main/assets/diagram-f83d631c40-light.png" width="972">
+</picture>
+
+<details>
+<summary>Mermaid source</summary>
+
+```text
+flowchart LR
+    accDescr: One changed fact leads to the code change, which is the easy part, and to every artifact that still asserts the old value: the README, docs and site copy, the published package, captured screenshots and recorded output, tests that pin the old value, the checkers that went vacuously green, and third-party listings.
     F["one fact changes<br/><i>a version, price, grade, name, endpoint</i>"]
     F --> C["the code change<br/><b>this part is easy</b>"]
     F --> S["every artifact that still<br/>asserts the old value"]
@@ -75,6 +84,8 @@ flowchart TD
     class C easy;
     class R,D,P,H,T,G,L hard;
 ```
+
+</details>
 
 The hardest carriers are the last two: a checker that was watching the old value
 now passes over nothing, and a listing you do not own keeps serving the old claim
@@ -158,8 +169,17 @@ A skill is not free just because it is markdown. Its frontmatter is loaded at
 the start of every session for every skill you have installed, whether or not it
 ever fires.
 
-```mermaid
-flowchart LR
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/efaimo-ai/claim-sweep/main/assets/diagram-893fe56fd6-dark.png">
+  <img alt="Installing puts SKILL.md and references/ in .claude/skills/claim-sweep/. The frontmatter enters your context window in every session, the body only when the skill triggers, and the references only if the agent reads them." src="https://raw.githubusercontent.com/efaimo-ai/claim-sweep/main/assets/diagram-893fe56fd6-light.png" width="756">
+</picture>
+
+<details>
+<summary>Mermaid source</summary>
+
+```text
+flowchart TD
+    accDescr: Installing puts SKILL.md and references/ in .claude/skills/claim-sweep/. The frontmatter enters your context window in every session, the body only when the skill triggers, and the references only if the agent reads them.
     N["npx -y --allow-git=all github:efaimo-ai/claim-sweep"] --> D[/".claude/skills/claim-sweep/"/]
     D --> M["frontmatter<br/><b>every session, always</b>"]
     D --> B["SKILL.md body<br/><i>only when it triggers</i>"]
@@ -172,6 +192,8 @@ flowchart LR
     class M always;
     class B,R lazy;
 ```
+
+</details>
 
 In this skill's case, measured by [efaimo](https://github.com/efaimo-ai/efaimo) `weigh` (v0.6.0, 2026-11-02):
 **92 tokens always resident**, 1,657 when it triggers, 2,647 across 2 reference files if the agent reads to the end.
@@ -195,8 +217,17 @@ Every skill in this set is about a report that was true about the wrong thing.
 | [`mcp-stateless-migration`](https://github.com/efaimo-ai/mcp-stateless-migration) | a server said ok | which revision it speaks |
 | [`efaimo`](https://github.com/efaimo-ai/efaimo) | a tool said A(100) | what a grade certifies, and what it costs |
 
-```mermaid
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/efaimo-ai/claim-sweep/main/assets/diagram-551d022a22-dark.png">
+  <img alt="Every skill in the set and the efaimo CLI, with an edge for each handoff between two of them. claim-sweep is highlighted." src="https://raw.githubusercontent.com/efaimo-ai/claim-sweep/main/assets/diagram-551d022a22-light.png" width="758">
+</picture>
+
+<details>
+<summary>Mermaid source</summary>
+
+```text
 graph TD
+    accDescr: Every skill in the set and the efaimo CLI, with an edge for each handoff between two of them. claim-sweep is highlighted.
     red_before_green["red-before-green"]
     denominator["denominator"]
     read_it_back["read-it-back"]
@@ -221,6 +252,8 @@ graph TD
     classDef self fill:#0b728533,stroke:#0b7285,stroke-width:2px;
     class claim_sweep self;
 ```
+
+</details>
 
 Each edge is a real handoff, not a category: the reason one skill points at
 another is written into it at [efaimo.com/skills](https://efaimo.com/skills), and
